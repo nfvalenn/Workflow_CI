@@ -1,0 +1,58 @@
+name: mental-health-ci
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'MLProject/**'
+      - '.github/workflows/ci.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  train:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12.7'
+
+      - name: Check Env
+        run: |
+          python --version
+          echo "Environment setup complete."
+
+      - name: Install dependencies
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          activate-environment: mental-health-ci
+          environment-file: MLProject/conda.yaml
+          auto-update-conda: true
+          auto-activate-base: false
+
+      - name: Run MLflow Project (Local)
+        run: |
+          source $CONDA/etc/profile.d/conda.sh
+          conda activate mental-health-ci
+          cd MLProject
+          mlflow run . --env-manager=local -P n_estimators=100 -P random_state=42
+
+      - name: Upload MLflow artifacts to GitHub
+        if: always()
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add MLProject/mlruns || echo "No changes to add"
+          git commit -m "Save MLflow artifacts [skip ci]" || echo "No changes to commit"
+          git push || echo "Nothing to push"
+
+      - name: Complete job
+        run: echo "CI Workflow complete!"
