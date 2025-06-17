@@ -1,0 +1,15 @@
+artifact_uri: file:///D:/SMSL_Nabila-Febriyanti-Valentin/New%20folder%20%282%29/MLProject/mlruns/0/58bf0b6308c54b7290d59b670d04fb6d/artifacts
+end_time: 1750179516054
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 58bf0b6308c54b7290d59b670d04fb6d
+run_name: rumbling-mule-631
+run_uuid: 58bf0b6308c54b7290d59b670d04fb6d
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1750179514919
+status: 3
+tags: []
+user_id: runner
