@@ -130,6 +130,6 @@ Setiap terjadi push atau pull request ke repository ini, GitHub Actions akan men
 
 | Nama                           | Username Dicoding |                   
 | ------------------------------ | ----------------- |
-| **Nabila Febriyanti Valentin** | nfvalenn          |
+| **Nabila Febriyanti Valentin** | nfvalen02         |
 
 ---
